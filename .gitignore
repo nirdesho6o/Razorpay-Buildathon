@@ -1,0 +1,39 @@
+# Environment
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+.env.*
+!.env.example
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# SQLite databases
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# pytest
+.pytest_cache/
+
+# Coverage
+htmlcov/
+.coverage

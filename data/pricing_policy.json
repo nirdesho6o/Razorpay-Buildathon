@@ -1,0 +1,34 @@
+{
+  "version": "v1",
+  "rules": {
+    "bundle_discount": {
+      "enabled": true,
+      "min_distinct_items": 3,
+      "discount_pct": 10.0,
+      "description": "10% off when cart has 3 or more distinct products"
+    },
+    "volume_tier": {
+      "enabled": true,
+      "tiers": [
+        { "min_qty": 5, "discount_pct": 8.0 },
+        { "min_qty": 10, "discount_pct": 15.0 }
+      ],
+      "description": "Volume discount based on total item count across all products"
+    },
+    "time_decay": {
+      "enabled": true,
+      "days_threshold": 30,
+      "discount_pct": 5.0,
+      "description": "5% off on products listed more than 30 days ago"
+    },
+    "concession": {
+      "enabled": true,
+      "max_rounds": 3,
+      "concession_rate": 0.3,
+      "description": "In negotiation, merchant moves 30% toward floor each round"
+    }
+  },
+  "max_discount_pct": 25.0,
+  "floor_multiplier": 0.65,
+  "updated_at": "2026-08-01T00:00:00Z"
+}
