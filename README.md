@@ -49,6 +49,37 @@ python demo/run_demo.py
 
 ## Architecture
 
+<p align="center">
+  <img src="docs/merchantagent_system_overview.png" alt="MerchantAgent System Architecture" width="700">
+</p>
+
+Three zones: the **buyer agent** (LLM-powered) discovers and negotiates,
+the **protocol layer** (FastAPI) enforces pricing rules and logs every decision,
+and the **merchant agent** (config-driven) holds catalog, pricing policy, and order state.
+Razorpay test-mode APIs handle the actual money movement at the bottom.
+
+## Transaction flow
+
+<p align="center">
+  <img src="docs/merchantagent_transaction_flow.png" alt="MerchantAgent Transaction Flow" width="700">
+</p>
+
+The full lifecycle of a single purchase — from the buyer agent parsing a shopping task
+to payment confirmation. The negotiation loop (steps 5–7) can cycle up to 3 rounds.
+If payment fails, the system holds the order with a price lock and retries before expiring.
+Every step produces an audit record.
+
+## Pricing engine
+
+<p align="center">
+  <img src="docs/pricing_mechanism_detail.png" alt="Pricing Engine Detail" width="700">
+</p>
+
+The pricing engine takes two inputs — the buyer's cart and the merchant's policy —
+and runs them through composable discount rules (bundle, volume, time decay, concession curve).
+Discounts stack additively and are clamped to the merchant's maximum cap.
+Every invocation produces both a decision (accept, counter, or reject) and a full audit record
+tracing which rules fired and what policy authorized the final price.
 ```
 Buyer Agent (Claude)
     │
